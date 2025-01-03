@@ -157,9 +157,9 @@ async function startAnimation() {
   }, 30);
 }
 
-async function stopAnimation() {
+function stopAnimation() {
   clearInterval(animationInterval);
-  await logMessage("Animation stopped.");
+  logMessage("Animation stopped.");
 }
 
 function createReloadButton() {
