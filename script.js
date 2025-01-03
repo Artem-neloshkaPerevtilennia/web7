@@ -16,10 +16,10 @@ function saveEventToLocal(eventType, message) {
   console.log("Event saved to LocalStorage:", eventId, eventData);
 }
 
-function sendEventToServer(eventType, message) {
+async function sendEventToServer(eventType, message) {
   const eventData = { eventType, message, time: new Date().toString() };
 
-  fetch('https://web7api.onrender.com/api/save', {
+  await fetch('https://web7api.onrender.com/api/save', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(eventData),
