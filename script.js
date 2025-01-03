@@ -133,7 +133,7 @@ function createStopButton() {
 }
 
 async function startAnimation() {
-  await logMessage("Animation started."); // не робе
+  await logMessage("Animation started.");
   animationInterval = setInterval(async () => {
     circlePosition.top += velocity.y;
     circlePosition.left += velocity.x;
@@ -157,9 +157,9 @@ async function startAnimation() {
   }, 30);
 }
 
-function stopAnimation() {
+async function stopAnimation() {
   clearInterval(animationInterval);
-  logMessage("Animation stopped.");
+  await logMessage("Animation stopped.");
 }
 
 function createReloadButton() {
