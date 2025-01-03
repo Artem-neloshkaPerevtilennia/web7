@@ -146,7 +146,7 @@ async function startAnimation() {
     }
 
     if (circlePosition.left >= animDiv.clientWidth - circle.offsetWidth) {
-      await logMessage("Circle exited anim area."); // не робе
+      logMessage("Circle exited anim area."); // не робе
       stopAnimation();
       createReloadButton();
       return;
@@ -157,9 +157,9 @@ async function startAnimation() {
   }, 30);
 }
 
-function stopAnimation() {
+async function stopAnimation() {
   clearInterval(animationInterval);
-  logMessage("Animation stopped.");
+  await logMessage("Animation stopped.");
 }
 
 function createReloadButton() {
