@@ -132,8 +132,8 @@ function createStopButton() {
   document.querySelector(".buttons").appendChild(stopButton);
 }
 
-async function startAnimation() {
-  await logMessage("Animation started.");
+function startAnimation() {
+  logMessage("Animation started.");
   animationInterval = setInterval(async () => {
     circlePosition.top += velocity.y;
     circlePosition.left += velocity.x;
