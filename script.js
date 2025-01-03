@@ -91,7 +91,7 @@ async function logMessage(message) {
         .then(response => response.json())
         .then(records => {
             console.log(records);
-            serverCell.textContent = records.message;
+            serverCell.textContent = JSON.stringify(records);
         })
         .catch(error => console.error('Error loading objects:', error));
 
