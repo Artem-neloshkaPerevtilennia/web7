@@ -82,6 +82,10 @@ function logMessage(message) {
   const serverCell = document.createElement("td");
   serverCell.style.border = "1px solid black";
   serverCell.style.padding = "8px";
+  serverCell.textContent = "Loading...";
+  row.appendChild(serverCell);
+
+  tbody.appendChild(row);
 
   fetch('https://web7api.onrender.com/api/get')
     .then(response => response.json())
@@ -97,12 +101,9 @@ function logMessage(message) {
       console.error("Error fetching server data:", error);
     });
 
-  row.appendChild(serverCell);
-
-  tbody.appendChild(row);
-
   logEvent("message_log", message);
 }
+
 
 playButton.addEventListener("click", () => {
   const stopButton = document.createElement("button");
