@@ -36,9 +36,70 @@ function logEvent(eventType, message) {
 
 function logMessage(message) {
   const time = new Date().toLocaleTimeString();
-  const logEntry = document.createElement("p");
-  logEntry.textContent = `[${time}] ${message}`;
-  messagesDiv.appendChild(logEntry);
+
+  let table = document.querySelector("#eventsTable");
+  if (!table) {
+    table = document.createElement("table");
+    table.id = "eventsTable";
+    table.style.border = "1px solid black";
+    table.style.width = "100%";
+    table.style.fontSize = "12px";
+    table.style.borderCollapse = "collapse";
+    table.style.marginTop = "20px";
+
+    const thead = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+    const headers = ["Local Events", "Server Events"];
+    headers.forEach(header => {
+      const th = document.createElement("th");
+      th.textContent = header;
+      th.style.border = "1px solid black";
+      th.style.padding = "8px";
+      th.style.backgroundColor = "#f2f2f2";
+      headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+    tbody.id = "eventsBody";
+    table.appendChild(tbody);
+
+    messagesDiv.appendChild(table);
+  }
+
+  const tbody = document.querySelector("#eventsBody");
+
+  const localData = `[${time}] ${message}`;
+  const row = document.createElement("tr");
+
+  const localCell = document.createElement("td");
+  localCell.textContent = localData;
+  localCell.style.border = "1px solid black";
+  localCell.style.padding = "8px";
+  row.appendChild(localCell);
+
+  const serverCell = document.createElement("td");
+  serverCell.style.border = "1px solid black";
+  serverCell.style.padding = "8px";
+
+  fetch('https://web7api.onrender.com/api/get')
+    .then(response => response.json())
+    .then(records => {
+      if (records && records.length > 0) {
+        serverCell.textContent = records[records.length - 1].message || "No message";
+      } else {
+        serverCell.textContent = "No server data";
+      }
+    })
+    .catch(error => {
+      serverCell.textContent = "Error loading server data";
+      console.error("Error fetching server data:", error);
+    });
+
+  row.appendChild(serverCell);
+
+  tbody.appendChild(row);
 
   logEvent("message_log", message);
 }
