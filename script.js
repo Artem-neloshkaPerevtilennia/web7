@@ -9,6 +9,45 @@ let animationInterval;
 let circlePosition = { top: 0, left: 0 };
 let velocity = { x: 2, y: 2 };
 
+// Функція для збереження подій у LocalStorage
+function saveEventToLocal(eventType, message) {
+  const eventId = (localStorage.length + 1).toString();
+  const eventData = JSON.stringify({ eventType, message, time: new Date().toISOString() });
+  localStorage.setItem(eventId, eventData);
+  console.log("Event saved to LocalStorage:", eventId, eventData);
+}
+
+// Функція для негайного відправлення подій на сервер
+function sendEventToServer(eventType, message) {
+  const eventData = { eventType, message, time: new Date().toISOString() };
+
+  fetch('https://web-api-7.onrender.com/api/events', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(eventData),
+  })
+    .then(response => response.json())
+    .then(data => console.log("Event sent to server:", data))
+    .catch(error => console.error("Error sending event:", error));
+}
+
+// Загальна функція для запису подій
+function logEvent(eventType, message) {
+  saveEventToLocal(eventType, message);
+  sendEventToServer(eventType, message);
+}
+
+// Оновлена функція logMessage для використання logEvent
+function logMessage(message) {
+  const time = new Date().toLocaleTimeString();
+  const logEntry = document.createElement("p");
+  logEntry.textContent = `[${time}] ${message}`;
+  messagesDiv.appendChild(logEntry);
+
+  // Виклик logEvent для реєстрації подій
+  logEvent("message_log", message);
+}
+
 playButton.addEventListener("click", () => {
   const stopButton = document.createElement("button");
   stopButton.id = "close";
@@ -91,9 +130,25 @@ function createReloadButton() {
   document.querySelector(".buttons").appendChild(reloadButton);
 }
 
-function logMessage(message) {
-  const time = new Date().toLocaleTimeString();
-  const logEntry = document.createElement("p");
-  logEntry.textContent = `[${time}] ${message}`;
-  messagesDiv.appendChild(logEntry);
+// Завантаження подій з LocalStorage під час закриття або ініціалізації
+async function loadEventsFromLocalStorage() {
+  const recordsFromServer = [];
+  const recordsFromLocal = [];
+
+  await fetch('https://web-api-7.onrender.com/api/get')
+    .then(response => response.json())
+    .then(records => {
+      console.log(records);
+      recordsFromServer.push(...records);
+    })
+    .catch(error => console.error('Error loading objects:', error));
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+    recordsFromLocal.push({ id: key, message: value });
+  }
+
+  console.log("Loaded LocalStorage Events:", recordsFromLocal);
+  console.log("Loaded Server Events:", recordsFromServer);
 }
