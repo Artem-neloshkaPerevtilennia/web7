@@ -35,6 +35,8 @@ function logEvent(eventType, message) {
 }
 
 async function logMessage(message) {
+  logEvent("message_log", message);
+
   const time = new Date().toLocaleTimeString();
 
   let table = document.querySelector("#eventsTable");
@@ -94,7 +96,6 @@ async function logMessage(message) {
         .catch(error => console.error('Error loading objects:', error));
 
   row.appendChild(serverCell);
-  logEvent("message_log", message);
 }
 
 
