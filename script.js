@@ -85,7 +85,9 @@ function logMessage(message) {
 
   tbody.appendChild(row);
 
-  fetch('https://web7api.onrender.com/api/get')
+  fetch('https://web7api.onrender.com/api/get', {
+    method: "GET"
+  })
     .then(response => response.json())
     .then(records => {
       if (records && records.length > 0) {
