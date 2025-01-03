@@ -82,8 +82,6 @@ function logMessage(message) {
   const serverCell = document.createElement("td");
   serverCell.style.border = "1px solid black";
   serverCell.style.padding = "8px";
-  serverCell.textContent = "Loading...";
-  row.appendChild(serverCell);
 
   tbody.appendChild(row);
 
@@ -101,6 +99,7 @@ function logMessage(message) {
       console.error("Error fetching server data:", error);
     });
 
+  row.appendChild(serverCell);
   logEvent("message_log", message);
 }
 
