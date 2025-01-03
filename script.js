@@ -30,12 +30,12 @@ async function sendEventToServer(eventType, message) {
 }
 
 async function logEvent(eventType, message) {
-  saveEventToLocal(eventType, message);
-  sendEventToServer(eventType, message);
+  await saveEventToLocal(eventType, message);
+  await sendEventToServer(eventType, message);
 }
 
 async function logMessage(message) {
-  await logEvent("message_log", message);
+  logEvent("message_log", message);
 
   const time = new Date().toLocaleTimeString();
 
