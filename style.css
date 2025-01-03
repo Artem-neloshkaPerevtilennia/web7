@@ -1,0 +1,250 @@
+/* Global Resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Navigation Bar */
+.nav-bar {
+  min-height: 25vh;
+  background-color: lightblue;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Main Content Section */
+.content {
+  display: flex;
+  flex-direction: row;
+  min-height: 75vh;
+}
+
+.left-side {
+  display: flex;
+  flex-wrap: wrap;
+  width: 75vw;
+  min-height: 50vh;
+  flex-direction: column;
+}
+
+.right-sidebar {
+  width: 25vw;
+  background-color: lightsalmon;
+  padding: 1%;
+  flex: 1;
+  min-height: 75vh;
+}
+
+/* Menu Content and Footer */
+.menu-contant-container {
+  display: flex;
+  min-height: 50vh;
+  flex: 1 1 auto;
+}
+
+.footer {
+  min-height: 25vh;
+  width: 100%;
+  background-color: lightblue;
+  display: flex;
+  align-self: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Sidebars and Main Content */
+.left-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 25vw;
+  min-height: 50vh;
+}
+
+.main-content {
+  width: 50vw;
+  background-color: white;
+  padding: 2%;
+}
+
+/* Side Menu and Sidebar Widget */
+.side-menu,
+.sidebar-widget {
+  min-height: 25hv;
+  width: 25vw;
+  padding: 10%;
+}
+
+.side-menu {
+  background-color: lightsalmon;
+}
+
+.sidebar-widget {
+  background-color: lightgreen;
+}
+
+/* Dynamic Blocks */
+.x,
+.y {
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+.x {
+  width: 25vw;
+  min-height: 50%;
+  margin: 0 3%;
+  padding: 0 3%;
+}
+
+.y {
+  width: 25vw;
+  min-height: 50%;
+  margin: 0 5%;
+  padding: 0 3%;
+  align-self: flex-start;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+nav {
+  margin-left: 5%;
+}
+
+/* Players Section */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Lists */
+.list {
+  margin: 5%;
+}
+
+.home {
+  height: 50%;
+}
+
+/* Logos */
+.logo {
+  height: 100%;
+}
+
+/* Quotes */
+.quote {
+  text-align: right;
+  width: 50%;
+  margin: 5%;
+}
+
+.words {
+  font-style: italic;
+}
+
+.chessboard {
+  width: 70%;
+}
+
+.control-container {
+  position: fixed;
+  top: 10px;
+  left: 5%;
+  width: calc(90% - 10%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.messages {
+  flex: 1;
+  margin-right: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.work {
+  display: none;
+  position: fixed;
+  top: 15%;
+  left: 5%;
+  width: calc(90% - 10%);
+  height: calc(70%);
+  background-color: lightgray;
+  border: 2px solid black;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.anim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(70%);
+  height: calc(100%);
+  background-color: white;
+  border: 5px solid red;
+  background-size: 32px 32px;
+}
+
+.controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(30% - 10px);
+  height: calc(100%);
+  background-color: lightblue;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.circle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+}
+
+.existing-layout {
+  padding: 20px;
+  background-color: #e0e0e0;
+}
+
+.existing-content {
+  margin: 10px 0;
+}
