@@ -35,7 +35,7 @@ async function logEvent(eventType, message) {
 }
 
 async function logMessage(message) {
-  logEvent("message_log", message);
+  await logEvent("message_log", message);
 
   const time = new Date().toLocaleTimeString();
 
@@ -158,7 +158,7 @@ function startAnimation() {
 
 function stopAnimation() {
   clearInterval(animationInterval);
-  logMessage("Animation stopped.");
+  logMessage("Circle exited anim area.");
 }
 
 function createReloadButton() {
