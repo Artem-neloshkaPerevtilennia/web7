@@ -29,13 +29,13 @@ async function sendEventToServer(eventType, message) {
     .catch(error => console.error("Error sending event:", error));
 }
 
-function logEvent(eventType, message) {
+async function logEvent(eventType, message) {
   saveEventToLocal(eventType, message);
   sendEventToServer(eventType, message);
 }
 
 async function logMessage(message) {
-  logEvent("message_log", message);
+  await logEvent("message_log", message);
 
   const time = new Date().toLocaleTimeString();
 
@@ -91,13 +91,12 @@ async function logMessage(message) {
         .then(response => response.json())
         .then(records => {
             console.log(records);
-            serverCell.textContent = JSON.stringify(records);
+            serverCell.textContent = JSON.stringify(records).message;
         })
         .catch(error => console.error('Error loading objects:', error));
 
   row.appendChild(serverCell);
 }
-
 
 playButton.addEventListener("click", () => {
   const stopButton = document.createElement("button");
