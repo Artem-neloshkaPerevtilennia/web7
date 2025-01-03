@@ -34,7 +34,7 @@ function logEvent(eventType, message) {
   sendEventToServer(eventType, message);
 }
 
-function logMessage(message) {
+async function logMessage(message) {
   const time = new Date().toLocaleTimeString();
 
   let table = document.querySelector("#eventsTable");
@@ -85,21 +85,13 @@ function logMessage(message) {
 
   tbody.appendChild(row);
 
-  fetch('https://web7api.onrender.com/api/get', {
-    method: "GET"
-  })
-    .then(response => response.json())
-    .then(records => {
-      if (records && records.length > 0) {
-        serverCell.textContent = records[records.length - 1].message || "No message";
-      } else {
-        serverCell.textContent = "No server data";
-      }
-    })
-    .catch(error => {
-      serverCell.textContent = "Error loading server data";
-      console.error("Error fetching server data:", error);
-    });
+  await fetch('https://web7api.onrender.com/api/get')
+        .then(response => response.json())
+        .then(records => {
+            console.log(records);
+            serverCell.textContent = records;
+        })
+        .catch(error => console.error('Error loading objects:', error));
 
   row.appendChild(serverCell);
   logEvent("message_log", message);
