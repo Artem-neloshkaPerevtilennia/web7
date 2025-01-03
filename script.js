@@ -19,7 +19,7 @@ function saveEventToLocal(eventType, message) {
 function sendEventToServer(eventType, message) {
   const eventData = { eventType, message, time: new Date().toISOString() };
 
-  fetch('https://web7api.onrender.com/api/events', {
+  fetch('https://web7api.onrender.com/api/save', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(eventData),
