@@ -91,27 +91,27 @@ async function logMessage(message) {
         .then(response => response.json())
         .then(records => {
             console.log(records);
-            serverCell.textContent = JSON.stringify(records);
+            serverCell.textContent = JSON.stringify(records).message;
         })
         .catch(error => console.error('Error loading objects:', error));
 
   row.appendChild(serverCell);
 }
 
-playButton.addEventListener("click", async () => {
+playButton.addEventListener("click", () => {
   const stopButton = document.createElement("button");
   stopButton.id = "close";
   stopButton.textContent = "Close";
 
-  stopButton.addEventListener("click", async () => {
+  stopButton.addEventListener("click", () => {
     workDiv.style.display = "none";
-    await logMessage("Work area hidden.");
+    logMessage("Work area hidden.");
     stopButton.remove();
   });
 
   document.querySelector(".buttons").appendChild(stopButton);
   workDiv.style.display = "block";
-  await logMessage("Work area displayed.");
+  logMessage("Work area displayed.");
 });
 
 startButton.addEventListener("click", () => {
@@ -132,9 +132,9 @@ function createStopButton() {
   document.querySelector(".buttons").appendChild(stopButton);
 }
 
-async function startAnimation() {
-  await logMessage("Animation started.");
-  animationInterval = setInterval(async () => {
+function startAnimation() {
+  logMessage("Animation started.");
+  animationInterval = setInterval(() => {
     circlePosition.top += velocity.y;
     circlePosition.left += velocity.x;
 
@@ -146,7 +146,7 @@ async function startAnimation() {
     }
 
     if (circlePosition.left >= animDiv.clientWidth - circle.offsetWidth) {
-      await logMessage("Circle exited anim area.");
+      logMessage("Circle exited anim area.");
       stopAnimation();
       createReloadButton();
       return;
@@ -157,16 +157,16 @@ async function startAnimation() {
   }, 30);
 }
 
-async function stopAnimation() {
+function stopAnimation() {
   clearInterval(animationInterval);
-  await logMessage("Animation stopped.");
+  logMessage("Animation stopped.");
 }
 
 function createReloadButton() {
   const reloadButton = document.createElement("button");
   reloadButton.id = "reload";
   reloadButton.textContent = "Reload";
-  reloadButton.addEventListener("click", async () => {
+  reloadButton.addEventListener("click", () => {
     circlePosition = { top: 0, left: 0 };
     velocity = { x: 2, y: 2 };
     circle.style.top = "0px";
@@ -175,7 +175,7 @@ function createReloadButton() {
     const closeButton = document.getElementById("stop");
     closeButton.remove();
     startButton.style.display = "block";
-    await logMessage("Animation reset.");
+    logMessage("Animation reset.");
   });
   document.querySelector(".buttons").appendChild(reloadButton);
 }
